@@ -1,0 +1,24 @@
+{
+    "priority": 5,
+    "request": {
+        "method": "POST",
+        "urlPath": "/v1/payments",
+        "headers": {
+            "Authorization": {
+                "equalTo": "Bearer valid-test-token"
+            }
+        }
+    },
+    "response": {
+        "status": 201,
+        "headers": {
+            "Content-Type": "application/json"
+        },
+        "jsonBody": {
+            "id": "abc-123",
+            "status": "succeeded",
+            "amount": 5000,
+            "currency": "USD"
+        }
+    }
+}

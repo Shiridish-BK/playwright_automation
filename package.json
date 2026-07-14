@@ -13,7 +13,8 @@
   "devDependencies": {
     "@playwright/test": "^1.61.1",
     "@types/node": "^26.1.1",
-    "typescript": "^7.0.2"
+    "typescript": "^7.0.2",
+    "wiremock": "^3.13.2"
   },
   "dependencies": {
     "playwright": "^1.61.1",

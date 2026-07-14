@@ -1,0 +1,26 @@
+{
+  "priority": 1,
+  "request": {
+    "method": "POST",
+    "urlPath": "/v1/payments",
+    "headers": {
+      "Authorization": {
+        "equalTo": "Bearer valid-test-token"
+      }
+    },
+    "bodyPatterns": [
+      { "matchesJsonPath": "$[?(@.amount>999999)]" }
+    ]
+  },
+  "response": {
+    "status": 422,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "jsonBody": {
+      "error": "card_declined",
+      "message": "The card was declined due to insufficient funds.",
+      "decline_code": "insufficient_funds"
+    }
+  }
+}

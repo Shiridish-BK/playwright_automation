@@ -1,0 +1,20 @@
+{
+  "priority": 1,
+  "request": {
+    "method": "POST",
+    "urlPath": "/v1/payments",
+    "headers": {
+      "X-Scenario": {
+        "equalTo": "timeout"
+      }
+    }
+  },
+  "response": {
+    "status": 200,
+    "fixedDelayMilliseconds": 8000,
+    "jsonBody": {
+      "id": "should-not-be-seen",
+      "status": "succeeded"
+    }
+  }
+}
