@@ -1,0 +1,15 @@
+node_modules/
+/test-results/
+/playwright-report/
+/reports/
+/blob-report/
+/flakiness-report/
+/playwright/.cache/
+*allure_results
+*allure-results
+*allure-report
+trace.zip
+# Environments
+.env
+.idea
+*.pem
