@@ -1,6 +1,6 @@
 import { test as base } from '@playwright/test';
-import { LoginPage } from './pages/LoginPage'
-import { InventoryPage } from './pages/InventoryPage';
+import { LoginPage } from '../pages/LoginPage'
+import { InventoryPage } from '../pages/InventoryPage';
 
 type Fixture = { inventoryPage: InventoryPage; }; // inventoryPage is the Fixture (navigated to inventory page) we will return to caller
 

@@ -1,4 +1,4 @@
-import { test, expect } from '../fixtures'
+import { test, expect } from "../../../src/fixtures/fixtures"
 
 test('verify logo', async ({ inventoryPage }) => {
     await expect(inventoryPage.logo).toBeVisible();

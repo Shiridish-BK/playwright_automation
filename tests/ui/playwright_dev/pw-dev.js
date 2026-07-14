@@ -1,9 +1,5 @@
 import { test, expect } from '@playwright/test';
 
-//test()
-//parameters:
-//   - title
-//   - callback function which the actual test body
 test('page has title', async ({ page }) => {
     await page.goto('http://playwright.dev/');
     await expect(page).toHaveTitle(/Playwright/);
