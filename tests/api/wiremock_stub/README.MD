@@ -1,15 +1,16 @@
-# npm install --save-dev wiremock
-# create wiremock mappings folder
+# Setup and execution
+## npm install --save-dev wiremock
+## create wiremock mappings folder
 - Wiremock looks for 'mappings' folder
-# Start Wiremock: 
+## Start Wiremock: 
 - npx wiremock --port 8089 --root-dir src/wiremock
-# Check the Admin API
+## Check the Admin API
 - curl http://localhost:8089/__admin/mappings
-# Invoke API (powershell)
+## Invoke API (powershell)
 - Invoke-RestMethod -Uri "http://localhost:8089/v1/payments" -Method Post -Headers @{ "Authorization" = "Bearer valid-test-token" } -ContentType "application/json" -Body '{"amount": 5000, "currency": "USD"}'
-# Reload Wiremock fresh from mappings folder after any new changes or files additions
+## Reload Wiremock fresh from mappings folder after any new changes or files additions
 - Invoke-RestMethod -Uri "http://localhost:8089/__admin/reset" -Method Post
-# For error scenarios
+## For error scenarios
 `try {
     Invoke-RestMethod -Uri "http://localhost:8089/v1/payments" -Method Post -Headers @{ "Authorization" = "Bearer wrong-token" } -ContentType "application/json" -Body '{"amount": 5000, "currency": "USD"}'
 } catch {
@@ -26,6 +27,7 @@
 - equalTo
 - doesNotMatch
 
-- priority
+- priority // to avoid priority-collision
 
 - fixedDelayMilliseconds 
+---
