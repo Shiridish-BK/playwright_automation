@@ -11,7 +11,7 @@ export class LoginPage {
         this.page = page;
         this.userName = page.locator('#user-name');
         this.password = page.locator('#password');
-        this.loginBtn = page.locator('[dta-test="login-button"]');
+        this.loginBtn = page.locator('[data-test="login-button"]');
     }
 
     // Actions

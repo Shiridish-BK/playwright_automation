@@ -1,0 +1,56 @@
+name: Playwright Tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  api-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: lts/*, cache: 'npm' }
+      - run: npm ci
+      - name: Start WireMock and wait until it's ready
+        run: |
+          npx wiremock --port 8089 --root-dir src/wiremock &
+          for i in {1..15}; do
+            curl -sf http://localhost:8089/__admin/mappings && break
+            sleep 1
+          done
+      - run: npx playwright test --project=api
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: api-report
+          path: playwright-report/
+
+  ui-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: lts/*, cache: 'npm' }
+      - name: Get Playwright version
+        id: pw-version
+        run: echo "version=$(node -pe "require('./package.json').devDependencies['@playwright/test']")" >> $GITHUB_OUTPUT
+      - name: Cache Playwright browsers
+        uses: actions/cache@v4
+        id: pw-cache
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ steps.pw-version.outputs.version }}
+      - run: npm ci
+      - if: steps.pw-cache.outputs.cache-hit != 'true'
+        run: npx playwright install --with-deps chromium
+      - if: steps.pw-cache.outputs.cache-hit == 'true'
+        run: npx playwright install-deps chromium
+      - run: npx playwright test --project=ui
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ui-report
+          path: playwright-report/
